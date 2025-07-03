@@ -531,7 +531,7 @@ void IEC62056Component::loop() {
           std::string val1;
           std::string val2;
 
-          if ('!' == in_buf_[frame_size - 1]) {
+          if ('!' == in_buf_[frame_size - 3]) {
             ESP_LOGV(TAG, "Detected end of readout record");
             break;
           }
