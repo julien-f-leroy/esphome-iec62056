@@ -525,7 +525,7 @@ void IEC62056Component::loop() {
           // parse data
           update_lrc_(in_buf_, frame_size);
 
-          in_buf_[frame_size - 2] = 0;
+          // in_buf_[frame_size - 2] = 0;
           ESP_LOGD(TAG, "Data: %s", in_buf_);
           std::string obis;
           std::string val1;
