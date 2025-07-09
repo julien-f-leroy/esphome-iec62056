@@ -504,12 +504,12 @@ void IEC62056Component::loop() {
           // include ETX (but exclude STX)
           lrc_ ^= ETX;  // faster than update_lrc_(in_buf_,1);
           bool bcc_failed = false;
-          if (lrc_ == readout_lrc_) {
-            ESP_LOGD(TAG, "BCC verification is OK");
-          } else {
-            ESP_LOGE(TAG, "BCC verification failed. Expected 0x%02x, got 0x%02x", lrc_, readout_lrc_);
+          //if (lrc_ == readout_lrc_) {
+          //  ESP_LOGD(TAG, "BCC verification is OK");
+          //} else {
+          //  ESP_LOGE(TAG, "BCC verification failed. Expected 0x%02x, got 0x%02x", lrc_, readout_lrc_);
             //bcc_failed = true;
-          }
+          //}
 
           connection_status_(false);
           //if (bcc_failed) {
@@ -523,16 +523,15 @@ void IEC62056Component::loop() {
           }
 
         } else {
-          // parse data
           update_lrc_(in_buf_, frame_size);
 
-          in_buf_[frame_size - 1] = 0;
+          in_buf_[frame_size - 2] = 0;
           ESP_LOGD(TAG, "Data: %s", in_buf_);
           std::string obis;
           std::string val1;
           std::string val2;
 
-          if ('!' == in_buf_[frame_size - 3]) {
+          if ('!' == in_buf_[0]) {
             ESP_LOGV(TAG, "Detected end of readout record");
             break;
           }
