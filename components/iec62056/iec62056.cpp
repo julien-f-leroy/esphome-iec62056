@@ -276,6 +276,7 @@ void IEC62056Component::loop() {
     return;
   }
 
+  ESP_LOGD(TAG, "State: %s", state_);
   switch (state_) {
     case INFINITE_WAIT:
       // only switch can set another state
