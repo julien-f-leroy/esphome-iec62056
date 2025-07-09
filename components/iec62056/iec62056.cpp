@@ -504,16 +504,15 @@ void IEC62056Component::loop() {
           // include ETX (but exclude STX)
           lrc_ ^= ETX;  // faster than update_lrc_(in_buf_,1);
           bool bcc_failed = false;
-          //if (lrc_ == readout_lrc_) {
-          //  ESP_LOGD(TAG, "BCC verification is OK");
-          //} else {
-          //  ESP_LOGE(TAG, "BCC verification failed. Expected 0x%02x, got 0x%02x", lrc_, readout_lrc_);
+          if (lrc_ == readout_lrc_) {
+            ESP_LOGD(TAG, "BCC verification is OK");
+          } else {
+            ESP_LOGE(TAG, "BCC verification failed. Expected 0x%02x, got 0x%02x", lrc_, readout_lrc_);
             //bcc_failed = true;
-          //}
+          }
 
           connection_status_(false);
-          //if (bcc_failed) {
-          if (false) {
+          if (bcc_failed) {
             retry_or_sleep_();
           } else {
             verify_all_sensors_got_value_();
