@@ -507,7 +507,7 @@ void IEC62056Component::loop() {
             ESP_LOGD(TAG, "BCC verification is OK");
           } else {
             ESP_LOGE(TAG, "BCC verification failed. Expected 0x%02x, got 0x%02x", lrc_, readout_lrc_);
-            bcc_failed = true;
+            //bcc_failed = true;
           }
 
           connection_status_(false);
@@ -525,7 +525,7 @@ void IEC62056Component::loop() {
           // parse data
           update_lrc_(in_buf_, frame_size);
 
-          // in_buf_[frame_size - 2] = 0;
+          in_buf_[frame_size - 1] = 0;
           ESP_LOGD(TAG, "Data: %s", in_buf_);
           std::string obis;
           std::string val1;
