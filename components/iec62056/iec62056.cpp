@@ -511,8 +511,8 @@ void IEC62056Component::loop() {
           }
 
           connection_status_(false);
-
-          if (bcc_failed) {
+          //if (bcc_failed) {
+          if (false) {
             retry_or_sleep_();
           } else {
             verify_all_sensors_got_value_();
