@@ -276,7 +276,6 @@ void IEC62056Component::loop() {
     return;
   }
 
-  ESP_LOGD(TAG, "State: %s", state_);
   switch (state_) {
     case INFINITE_WAIT:
       // only switch can set another state
@@ -530,7 +529,7 @@ void IEC62056Component::loop() {
           std::string val1;
           std::string val2;
 
-          if ('!' == in_buf_[0]) {
+         if ('!' == in_buf_[0]) {
             ESP_LOGV(TAG, "Detected end of readout record");
             break;
           }
@@ -539,6 +538,7 @@ void IEC62056Component::loop() {
             ESP_LOGE(TAG, "Invalid frame format: '%s'", in_buf_);
             break;
           }
+
 
           // Update all matching sensors
           auto range = sensors_.equal_range(obis);
